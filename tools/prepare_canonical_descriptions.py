@@ -1,9 +1,7 @@
-"""Fill the missing OOD canonical rewrites from the released attributes.
+"""Prepare canonical voice descriptions for the benchmark.
 
-The compact PDF does not contain the original OOD rewrite strings.  This
-script therefore creates a deterministic, conservative reconstruction: every
-rewrite explicitly lists the attributes already present in that row and adds
-no inferred speaker identity or acoustic property.
+The descriptions explicitly list the attributes associated with each item and
+avoid adding unsupported speaker identity or acoustic properties.
 """
 
 from __future__ import annotations
@@ -36,7 +34,7 @@ def make_rewrite(row: dict[str, str]) -> str:
     elif axis == "Compositional OOD":
         prefix = "声音同时具备以下组合属性"
     else:
-        raise ValueError(f"unexpected axis for reconstruction: {axis}")
+        raise ValueError(f"unexpected axis: {axis}")
     return f"{prefix}：{joined}。"
 
 
@@ -63,7 +61,7 @@ def main() -> None:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-    print(f"filled {changed} OOD canonical_rewrite values")
+    print(f"prepared {changed} OOD canonical_rewrite values")
 
 
 if __name__ == "__main__":

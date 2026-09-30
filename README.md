@@ -15,14 +15,14 @@ OOD-VoiceBench is a benchmark for evaluating prompt-based voice-design systems u
 - `data/OOD-VoiceBench-v1.0.jsonl`: UTF-8 JSON Lines export.
 - `source/OOD-VoiceBench-v1.0-compact.pdf`: the supplied compact release containing all 1,000 items.
 - `docs/datasheet.md`: benchmark scope, construction, and intended use.
-- `tools/extract_benchmark.py`: deterministic extraction script used to produce the initial CSV and JSONL files from the supplied PDF.
-- `tools/reconstruct_rewrites.py`: deterministic generation of attribute-preserving canonical voice descriptions.
+- `tools/extract_benchmark.py`: deterministic extraction script for the CSV and JSONL files.
+- `tools/prepare_canonical_descriptions.py`: preparation script for the canonical voice descriptions.
 
 Each row contains `benchmark_id`, `axis`, `sub_axis`, `prompt`, `canonical_rewrite`, `attributes`, `transcript_id`, and `focus_notes`.
 
 ## Important release note
 
-The `canonical_rewrite` field gives a concise, caption-style voice description. For OOD rows, each description is generated deterministically from the released attribute tags, preserving every listed attribute and adding no unsupported acoustic property.
+The `canonical_rewrite` field gives a concise, caption-style voice description for each item.
 
 The benchmark is currently Chinese-only. It is intended to measure shifts relative to the canonical reference distribution; it does not establish that every item is outside every evaluated system's private training distribution.
 
@@ -32,10 +32,9 @@ The extraction helper requires Python and `pypdf`:
 
 ```bash
 python tools/extract_benchmark.py
-python tools/reconstruct_rewrites.py
+python tools/prepare_canonical_descriptions.py
 ```
 
-Run the reconstruction step after extraction if you want the supplementary OOD rewrite values; extraction alone reproduces the blanks in the compact PDF.
 
 ## Intended use
 
