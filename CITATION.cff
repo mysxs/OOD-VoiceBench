@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "OOD-VoiceBench: Benchmarking Prompt-Based Voice Design under Realistic User-Expression Shifts"
+type: dataset
+version: "1.0"
+year: 2026
+repository-code: "https://github.com/mysxs/OOD-VoiceBench"
+url: "https://github.com/mysxs/OOD-VoiceBench"
+authors:
+  - family-names: "Su"
+    given-names: "Xiaosu"
