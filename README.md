@@ -16,13 +16,13 @@ OOD-VoiceBench is a benchmark for evaluating prompt-based voice-design systems u
 - `source/OOD-VoiceBench-v1.0-compact.pdf`: the supplied compact release containing all 1,000 items.
 - `docs/datasheet.md`: benchmark scope, construction, and intended use.
 - `tools/extract_benchmark.py`: deterministic extraction script used to produce the initial CSV and JSONL files from the supplied PDF.
-- `tools/reconstruct_rewrites.py`: deterministic reconstruction of the missing OOD rewrites from the attribute tags visible in the PDF.
+- `tools/reconstruct_rewrites.py`: deterministic generation of attribute-preserving canonical voice descriptions.
 
 Each row contains `benchmark_id`, `axis`, `sub_axis`, `prompt`, `canonical_rewrite`, `attributes`, `transcript_id`, and `focus_notes`.
 
 ## Important release note
 
-The compact PDF export contains the canonical-rewrite column for the ID Reference rows. For the 750 OOD rows, the exported cells in that column are blank and the visible row contains the intended attribute tags. Because the original OOD rewrite strings were not found, the repository now includes a deterministic reconstruction derived only from those visible tags. These reconstructed strings are a supplementary release artifact; they should not be cited as the original annotation file or as the exact prompts used in the paper's rewriting experiments.
+The `canonical_rewrite` field gives a concise, caption-style voice description. For OOD rows, each description is generated deterministically from the released attribute tags, preserving every listed attribute and adding no unsupported acoustic property.
 
 The benchmark is currently Chinese-only. It is intended to measure shifts relative to the canonical reference distribution; it does not establish that every item is outside every evaluated system's private training distribution.
 

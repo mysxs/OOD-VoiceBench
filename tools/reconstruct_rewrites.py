@@ -25,11 +25,16 @@ def make_rewrite(row: dict[str, str]) -> str:
     joined = "、".join(attrs)
     axis = row["axis"]
     if axis == "Style OOD":
-        prefix = "说话者的整体说话风格应体现"
+        if row["sub_axis"] == "metaphorical":
+            prefix = "声音的音色质感呈现"
+        elif row["sub_axis"] == "scenario":
+            prefix = "声音整体呈现出相应场景中的说话风格，具体表现为"
+        else:
+            prefix = "声音整体呈现以下表达特点"
     elif axis == "Lexical OOD":
-        prefix = "声音的音色、语气和表达特征应体现"
+        prefix = "声音的音色、语气和表达特征为"
     elif axis == "Compositional OOD":
-        prefix = "声音应同时呈现以下组合属性"
+        prefix = "声音同时具备以下组合属性"
     else:
         raise ValueError(f"unexpected axis for reconstruction: {axis}")
     return f"{prefix}：{joined}。"
@@ -41,7 +46,7 @@ def main() -> None:
 
     changed = 0
     for row in rows:
-        if row["axis"] != "ID Reference" and not row["canonical_rewrite"].strip():
+        if row["axis"] != "ID Reference":
             row["canonical_rewrite"] = make_rewrite(row)
             changed += 1
 

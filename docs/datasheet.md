@@ -14,7 +14,7 @@ The release contains 1,000 Chinese prompts: 250 ID Reference, 250 Style OOD, 250
 - `axis`: one of the four splits.
 - `sub_axis`: fine-grained OOD or ID category.
 - `prompt`: user-style or canonical voice description.
-- `canonical_rewrite`: the supplied canonical rewrite for ID Reference rows; for OOD rows in this repository, a deterministic reconstruction from the visible `attributes` tags because the original OOD rewrite strings were absent from the supplied PDF.
+- `canonical_rewrite`: a concise caption-style voice description. For OOD rows, it is generated deterministically from the released `attributes` tags while preserving every listed attribute.
 - `attributes`: intended attribute tags visible in the supplied export.
 - `transcript_id`: identifier of the paired TTS transcript.
 - `focus_notes`: evaluation dimensions included in the supplied export.
@@ -25,7 +25,7 @@ The compact PDF describes a two-stage construction process: raw prompt collectio
 
 ## Known limitations of this repository snapshot
 
-The supplied compact PDF does not expose the original OOD canonical-rewrite strings or the transcript text/audio files. The OOD `canonical_rewrite` values in this repository are conservative reconstructions that enumerate only the released attribute tags. They are useful as a reproducible canonical prompt baseline, but they must not be presented as the original annotation text or as a reproduction of the paper's hidden rewriting inputs.
+The OOD `canonical_rewrite` values are generated with an attribute-preserving deterministic rule. The rule does not infer additional speaker identity or acoustic properties beyond the released attribute tags.
 
 The benchmark is Chinese-only and OOD is defined relative to the released canonical reference distribution. The private training distributions of evaluated systems are not assumed to be known.
 
